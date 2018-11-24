@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.work.model.User">
+    <id column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phoneNumber" jdbcType="INTEGER" property="phonenumber" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where userId = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.work.model.User">
+    insert into user (userId, userName, sex, 
+      password, phoneNumber, address, 
+      date)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{phonenumber,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{date,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.work.model.User">
+    update user
+    set userName = #{username,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phoneNumber = #{phonenumber,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select userId, userName, sex, password, phoneNumber, address, date
+    from user
+    where userId = #{userid,jdbcType=INTEGER}
+  </select>
+  <select id="findUserId" resultMap="BaseResultMap">
+      select userId
+      from user
+      where userId = #{userid,jdbcType=INTEGER}
+  </select>
+  <select id="findPassword" resultMap="BaseResultMap">
+      select password
+      from user
+      where userName = #{username,jdbcType=INTEGER}
+  </select>
+  <select id="findUserName" resultMap="BaseResultMap">
+      select userName,password
+      from user
+      where userName = #{username,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select userId, userName, sex, password, phoneNumber, address, date
+    from user
+  </select>
+</mapper>

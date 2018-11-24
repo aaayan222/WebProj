@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function changeCode(){
+            //得到图片元素
+            var img = document.getElementsByTagName("img")[0];
+            //img.setAttribute("src","/HttpServlet/ServletDemo04");//xml dom 语法
+            // 给URL传递参数可以清空浏览器的缓存，让浏览器认为这是一个新的请求
+            img.src = "/HttpServlet/ServletDemo04?time="+new Date().getTime();
+        }
+    </script>
+</head>
+<body>
+<form action="#" method="post">
+    用户名：<input type="text" name="userName"/></br>
+    密码：<input type="password" name="pwd"/></br>
+    验证码：<input type="text" name="code"/>
+    <img src="/HttpServlet/ServletDemo04" onclick="changeCode()"/>
+    <a href="javascript:changeCode()">看不清换一张</a></br>
+    <input type="submit" value="登录"/></br>
+</form>
+</body>
+</html>
